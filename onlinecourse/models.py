@@ -113,15 +113,17 @@ class Question(models.Model):
     def __str__(self):
         return "Question: " + self.content
 
+# Choice model
 class Choice(models.Model):
     content = models.CharField(max_length=200)
     is_correct = models.IntegerField(default=False)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
-# One enrollment could have multiple submission
-# One submission could have multiple choices
-# One choice could belong to multiple submissions
+# Submission model
 class Submission(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     choices = models.ManyToManyField(Choice)
- # HERE
+
+# One enrollment could have multiple submission
+# One submission could have multiple choices
+# One choice could belong to multiple submissions
